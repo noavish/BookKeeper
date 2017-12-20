@@ -1,0 +1,13 @@
+.label {
+    width: 15%;
+    float: left;
+}
+
+.reply {
+    width: 85%;
+    float: left;
+}
+
+button {
+    border-radius: 5px;
+}
