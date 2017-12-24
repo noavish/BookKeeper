@@ -1,36 +1,60 @@
-function submitForm () {
-    var newName = document.getElementById('userName').value;
-    var rUserName = document.getElementById('rUserName');
-    if (newName.length < 5) {
-        var massage = document.createElement('div');
-        var tooShort = document.createTextNode('The supplied username is too short, try again using 5 or more characters');
-        var att = document.createAttribute('id');
-        att.value = "nameError";
-        massage.attributes.setNamedItem(att);
-        massage.appendChild(tooShort);
-        rUserName.appendChild(massage);
-    } else {
-        if(document.getElementById('nameError')) {
-            document.getElementById('nameError').style.display = "none";
-        }
-        // document.getElementById('nameError').innerHTML = "";
+function newSpanToAppend (text, parentElement) {
+    var errorMassage = document.createElement('span');
+    var errorText = document.createTextNode(text);
+    var att = document.createAttribute('class');
+    att.value = "error";
+    errorMassage.attributes.setNamedItem(att);
+    var att2 = document.createAttribute('data-source');
+    att2.value = parentElement;
+    errorMassage.attributes.setNamedItem(att2);
+    errorMassage.appendChild(errorText);
+    document.getElementById(parentElement).appendChild(errorMassage);
+}
 
-        // alert ("Thank you " + newName);        
-    }
-    var newPassword = document.getElementById('password').value;
-    var rPassword = document.getElementById('rPassword');
-    if (newPassword.length < 6) {
-        var massage = document.createElement('div');
-        var tooShort = document.createTextNode('The password needs at least 6 characters');
-        var att = document.createAttribute('id');
-        att.value = "passError";
-        massage.attributes.setNamedItem(att);
-        massage.appendChild(tooShort);
-        rPassword.appendChild(massage);
-    } else {
-        if(document.getElementById('passError')) {
-        document.getElementById('passError').style.display = "none";
-        // document.getElementById('passError').innerHTML = "";   
-        }  
+function submitForm () {
+    var errorSpan = document.querySelector('.error[data-source=rUserName]');    
+    var newName = document.getElementById('userName').value;
+    if (newName.length < 5 && !errorSpan) {
+        newSpanToAppend('The supplied username is too short, try again using 5 or more characters', 'rUserName');
+    } else if (newName.length >= 5 && errorSpan) {
+        document.getElementById('rUserName').removeChild(errorSpan);
+        // errorSpan.style.display = 'none';  
     }
 }
+
+//     var newPassword = document.getElementById('password').value;
+//     if (newPassword.length < 6) {
+//         newSpanToAppend('The password needs at least 6 characters', 'rPassword');
+//     } else {
+//         if(document.querySelector('.error')) {
+//             document.querySelector('.error').style.display = "none";
+//         // document.getElementById('passError').innerHTML = "";   
+//         }  
+//     }
+   
+//     var newPassword2 = document.getElementById('password2').value;
+//     if (newPassword !== newPassword2) {
+//         newSpanToAppend('Passwords are not the same', 'rPassword2');
+//     } else {
+//         if(document.getElementById('passError2')) {
+//         document.getElementById('passError2').style.display = "none";
+//         // document.getElementById('passError').innerHTML = "";   
+//         }  
+//     }
+
+//     var newCountry = document.getElementById('country').value;
+//     if (newCountry !== "United States" && newCountry !== "Israel") {
+//         newSpanToAppend('You can only sign-up from Israel or from USA', 'country');
+//     } else {
+
+//     }
+
+//     var newPhone = document.getElementById('phoneNumber').value;
+//     if (newPhone.value < 15) {
+//         newSpanToAppend('Phone number must be shorter than 15 digits', 'rPhoneNumber');
+//     } else {
+
+//     }
+
+
+// }

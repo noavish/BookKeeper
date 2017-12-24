@@ -1,53 +1,34 @@
-function submitForm () {
-    var newName = document.getElementById('userName').value;
-    var rUserName = document.getElementById('rUserName');
-    if (newName.length < 5) {
-        var massage = document.createElement('div');
-        var tooShort = document.createTextNode('The supplied username is too short, try again using 5 or more characters');
-        var att = document.createAttribute('id');
-        att.value = "nameError";
-        massage.attributes.setNamedItem(att);
-        massage.appendChild(tooShort);
-        rUserName.appendChild(massage);
-    } else {
-        if(document.getElementById('nameError')) {
-            document.getElementById('nameError').style.display = "none";
-        }
-        // document.getElementById('nameError').innerHTML = "";
+function newSpanToAppend (parentElement, text) {
+    var errorMassage = document.createElement('span');
+    var errorText = document.createTextNode(text);
+    var att = document.createAttribute('class');
+    att.value = "error";
+    errorMassage.attributes.setNamedItem(att);
+    var att2 = document.createAttribute('data-source');
+    att2.value = parentElement;
+    errorMassage.attributes.setNamedItem(att2);
+    errorMassage.appendChild(errorText);
+    document.getElementById(parentElement).appendChild(errorMassage);
+}
 
-        // alert ("Thank you " + newName);        
-    }
-    var newPassword = document.getElementById('password').value;
-    var rPassword = document.getElementById('rPassword');
-    if (newPassword.length < 6) {
-        var massage = document.createElement('div');
-        var tooShort = document.createTextNode('The password needs at least 6 characters');
-        var att = document.createAttribute('id');
-        att.value = "passError";
-        massage.attributes.setNamedItem(att);
-        massage.appendChild(tooShort);
-        rPassword.appendChild(massage);
-    } else {
-        if(document.getElementById('passError')) {
-        document.getElementById('passError').style.display = "none";
-        // document.getElementById('passError').innerHTML = "";   
-        }  
-    }
-   
-    var newPassword2 = document.getElementById('password2').value;
-    var rPassword2 = document.getElementById('rPassword2');
-    if (newPassword !== newPassword2) {
-        var massage = document.createElement('div');
-        var tooShort = document.createTextNode('Passwords are not the same');
-        var att = document.createAttribute('id');
-        att.value = "passError2";
-        massage.attributes.setNamedItem(att);
-        massage.appendChild(tooShort);
-        rPassword2.appendChild(massage);
-    } else {
-        if(document.getElementById('passError2')) {
-        document.getElementById('passError2').style.display = "none";
-        // document.getElementById('passError').innerHTML = "";   
-        }  
+function inputValidation (parentElement, text, predicate) {
+    var errorSpan = document.querySelector(`.error[data-source=${parentElement}`); 
+    var inputValue = document.querySelector(`#${parentElement} input,select`).value;
+    if (!predicate(inputValue) && !errorSpan) {
+        newSpanToAppend(parentElement, text);
+    } else if (predicate(inputValue) && errorSpan) {
+        document.getElementById(parentElement).removeChild(errorSpan);        
     }
 }
+
+function submitForm () {
+    inputValidation('rUserName', 'The supplied username is too short, try again using 5 or more characters', function (valueString) {return valueString.length >= 5;});
+    inputValidation('rPassword', 'The password needs at least 6 characters', function (valueString) {return valueString.length >= 6;});
+    inputValidation('rPassword2', 'Passwords have to be the same', function(valueString) {return valueString === document.getElementById('password').value;});
+    inputValidation('rCountry', 'You can only sign-up from Israel or from USA', function (valueString) {return (valueString === "United States" || valueString === "Israel");});
+    inputValidation('rPhoneNumber', 'Phone number must be shorter than 15 digits', function (valueString) {return valueString.length < 15;});
+
+}
+    
+
+
