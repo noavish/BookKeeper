@@ -58,3 +58,11 @@ function submitForm () {
 
 
 // }
+
+// function submitForm () {
+//     inputValidation('rUserName', 'The supplied username is too short, try again using 5 or more characters', function (valueString) {return valueString.length >= 5;});
+//     inputValidation('rPassword', 'The password needs at least 6 characters', function (valueString) {return valueString.length >= 6;});
+//     inputValidation('rPassword2', 'Passwords have to be the same', function(valueString) {return valueString === document.getElementById('password').value;});
+//     inputValidation('rCountry', 'You can only sign-up from Israel or from USA', function (valueString) {return (valueString === "United States" || valueString === "Israel");});
+//     inputValidation('rPhoneNumber', 'Phone number must be shorter than 15 digits', function (valueString) {return valueString.length < 15;});    
+// }
