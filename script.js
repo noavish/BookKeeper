@@ -34,7 +34,7 @@ function submitForm () {
         greeting.appendChild(greetingMessage);
         greeting.style.textAlign = 'center';
         greeting.style.fontFamily = 'Verdana';
-        greeting.style.color = 'blue';
+        greeting.style.color = 'green';
         document.getElementById('form').appendChild(greeting);
     }    
 }
