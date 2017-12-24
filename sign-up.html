@@ -9,41 +9,41 @@
 </head>
 <body>
     <h1> Sign up: </h1>
-    <form>
+    <form id="form">
         <div class="label">
             Username: 
         </div>
-        <div class="reply">
-            <input type='text' placeholder="Name" />
+        <div class="reply" id="rUserName">
+            <input type='text' placeholder="Name" id="userName" /><span></span>
         </div>
         <div class="label">
             Email: 
         </div>
-        <div class="reply">
-            <input type='email' placeholder="Email" />
+        <div class="reply" id="rEmail">
+            <input type='email' placeholder="Email" id="email" /><span></span>
         </div>
         <div class="label">
             Password: 
         </div>
-        <div class="reply">
-            <input type='password' placeholder="Password" />
+        <div class="reply" id="rPassword">
+            <input type='password' placeholder="Password" id="password" /><span></span>
         </div>
         <div class="label">
             Repeat Password: 
         </div>
-        <div class="reply">
-            <input type='password' placeholder="Password" />
+        <div class="reply" id="rPassword2">
+            <input type='password' placeholder="Password" id="password2" /><span></span>
         </div>
         <div class="label">
             Phone Number:
         </div>
-        <div class="reply">
-            <input type='number' placeholder="Phone Number" />
+        <div class="reply" id="rPhoneNumber">
+            <input type='number' placeholder="Phone Number" id="phoneNumber" /><span></span>
         </div>
         <div class="label">
             Country:
         </div>
-        <div class="reply">
+        <div class="reply" id="rCountry"><span></span>
             <select name="Country">
                 <option value="Israel">Israel</option>
                 <option value="United States">United States</option>
@@ -52,10 +52,11 @@
             </select>
         </div>
         <div>
-            <button type="submit">Submit</button>
+            <button type="button" onclick="submitForm()">Submit</button>
         </div>
     </form>
     <br>
     <button><a href="index.html">Back to Home</a></button>
+    <script src="script1.js"></script>
 </body>
 </html>
